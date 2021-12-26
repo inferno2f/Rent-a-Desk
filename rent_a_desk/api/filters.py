@@ -5,8 +5,8 @@ from .models import Workspace
 
 
 class WorkspaceFilter(FilterSet):
-    reservations__booked_from = DateTimeFilter(exclude=True)
-    reservations__booked_till = DateTimeFilter(exclude=True)
+    reservations__booked_from = DateTimeFilter(exclude=True, lookup_expr='date')
+    reservations__booked_till = DateTimeFilter(exclude=True, lookup_expr='date')
 
     class Meta:
         model = Workspace
