@@ -1,6 +1,5 @@
 from django_filters import FilterSet
-from django_filters.filters import DateTimeFilter, DateTimeFromToRangeFilter
-from django_filters.widgets import DateRangeWidget
+from django_filters.filters import DateTimeFilter
 
 from .models import Workspace
 

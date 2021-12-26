@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Workspace, Reservation
+from .models import Reservation, Workspace
 
 
 class WorkspaceSerializer(serializers.ModelSerializer):
@@ -8,7 +8,7 @@ class WorkspaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Workspace
-        fields = ['id', 'name', 'reservations',]
+        fields = ('id', 'name', 'reservations')
 
 
 class ReservationSerializer(serializers.ModelSerializer):

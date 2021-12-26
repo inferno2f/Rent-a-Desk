@@ -1,10 +1,9 @@
-from django.db import models
-from django.contrib.auth import get_user_model
-from django.db.models import Q
-from django.db.models.constraints import CheckConstraint
-
 import datetime as dt
 
+from django.contrib.auth import get_user_model
+from django.db import models
+from django.db.models import Q
+from django.db.models.constraints import CheckConstraint
 
 User = get_user_model()
 
@@ -24,13 +23,14 @@ class Reservation(models.Model):
     booked_till = models.DateTimeField('Until:', blank=False)
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        constraints = [
+            CheckConstraint(
+                check=Q(booked_from__gte=dt.datetime.now()),
+                name='valid_booking_time'), ]
+
     def __str__(self) -> str:
         booking_info = (f'Reservation id:{self.id} | '
                         f'Customer: {self.customer} | '
                         f'Date: {self.booked_from}')
         return booking_info
- 
-    class Meta:
-       constraints = [
-           CheckConstraint(check=Q(booked_from__gte=dt.datetime.now()), name='valid_booking_time'),
-       ]

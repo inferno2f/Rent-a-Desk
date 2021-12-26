@@ -1,16 +1,16 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .filters import WorkspaceFilter
-from .models import Workspace, Reservation
-from .serializers import WorkspaceSerializer, ReservationSerializer
+from .models import Reservation, Workspace
+from .permissions import AdminOrReadOnly
+from .serializers import ReservationSerializer, WorkspaceSerializer
 
 
 class WorkspaceViewSet(viewsets.ModelViewSet):
     queryset = Workspace.objects.all()
     serializer_class = WorkspaceSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (AdminOrReadOnly,)
     filter_backends = (DjangoFilterBackend, )
     filter_class = WorkspaceFilter
     pagination_class = None
