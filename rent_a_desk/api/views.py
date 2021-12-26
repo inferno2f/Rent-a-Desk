@@ -1,5 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, generics, permissions
+from rest_framework import generics, permissions, viewsets
+from rest_framework.response import Response
 
 from .filters import WorkspaceFilter
 from .models import Reservation, Workspace
@@ -22,6 +23,17 @@ class WorkspaceViewSet(viewsets.ModelViewSet):
         'reservations__booked_from',
         'reservations__booked_till',
     )
+
+    def list(self, request, *args, **kwargs):
+        from_date = self.request.query_params.get('reservations__booked_from')
+        to_date = self.request.query_params.get('reservations__booked_till')
+        if from_date and to_date:
+            queryset = Workspace.objects.exclude(
+                reservations__booked_from__range=(from_date, to_date)).exclude(
+                reservations__booked_till__range=(from_date, to_date))
+            serializer = WorkspaceSerializer(queryset, many=True)
+            return Response(serializer.data)
+        return super().list(request, *args, **kwargs)
 
 
 class NewReservationAPIView(generics.CreateAPIView):
