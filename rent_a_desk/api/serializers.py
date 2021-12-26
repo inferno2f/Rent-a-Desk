@@ -14,4 +14,4 @@ class WorkspaceSerializer(serializers.ModelSerializer):
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = '__all__'
+        fields = ('workspace', 'booked_from', 'booked_till')
