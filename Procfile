@@ -1,1 +1,1 @@
-web: gunicorn myproject.wsgi
+web: cd rent_a_desk && gunicorn rent_a_desk.wsgi
