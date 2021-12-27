@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Reservation, Workspace
+from api.models import Reservation, Workspace
 
 
 class WorkspaceSerializer(serializers.ModelSerializer):

@@ -1,7 +1,7 @@
 from django_filters import FilterSet
 from django_filters.filters import DateTimeFilter
 
-from .models import Workspace
+from api.models import Workspace
 
 
 class WorkspaceFilter(FilterSet):

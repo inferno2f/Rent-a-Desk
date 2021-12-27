@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework.routers import SimpleRouter
 
-from .views import NewReservationAPIView, RerervationViewSet, WorkspaceViewSet
+from api.views import NewReservationAPIView, RerervationViewSet, WorkspaceViewSet
 
 app_name = 'api'
 
