@@ -23,6 +23,7 @@ MarkupSafe==2.0.1
 mccabe==0.6.1
 packaging==21.3
 platformdirs==2.4.0
+psycopg2==2.8.4
 pycodestyle==2.8.0
 pylint==2.12.2
 pyparsing==3.0.6
