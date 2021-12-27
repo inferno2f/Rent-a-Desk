@@ -29,8 +29,10 @@ class WorkspaceViewSet(viewsets.ModelViewSet):
         to_date = self.request.query_params.get('reservations__booked_till')
         if from_date and to_date:
             queryset = Workspace.objects.exclude(
-                reservations__booked_from__range=(from_date, to_date)).exclude(
-                reservations__booked_till__range=(from_date, to_date))
+                reservations__booked_from__gte=from_date,
+                reservations__booked_from__lte=to_date).exclude(
+                reservations__booked_till__gte=from_date,
+                reservations__booked_till__lte=to_date)
             serializer = WorkspaceSerializer(queryset, many=True)
             return Response(serializer.data)
         return super().list(request, *args, **kwargs)
