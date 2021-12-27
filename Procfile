@@ -1,1 +1,1 @@
-web: gunicorn rent-a-desk.wsgi
+web: gunicorn rent_a_desk.wsgi
