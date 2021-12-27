@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import django_heroku
 import os
 
@@ -23,7 +21,7 @@ STATICFILES_DIRS = (
 SECRET_KEY = 'django-insecure-$!yes^@o8-y(vcfrkl3zd*92#v2h3j3&sk1cllk&xr_w$3g6@v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -56,6 +54,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+MIDDLEWARE_CLASSES = (
+    # Simplified static file serving.
+    # https://warehouse.python.org/project/whitenoise/
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+)
+
 ROOT_URLCONF = 'rent_a_desk.urls'
 
 TEMPLATES = [
@@ -83,7 +87,7 @@ WSGI_APPLICATION = 'rent_a_desk.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -134,3 +138,5 @@ CORS_URLS_REGEX = r'^/api/.*$'
 
 # Heroku
 django_heroku.settings(locals())
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
